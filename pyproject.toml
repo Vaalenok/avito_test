@@ -1,0 +1,16 @@
+[project]
+name = "avito-test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "asyncpg>=0.30.0",
+    "colorlog>=6.10.1",
+    "environs>=14.5.0",
+    "fastapi>=0.121.3",
+    "pytz>=2025.2",
+    "ruff>=0.14.6",
+    "sqlalchemy>=2.0.44",
+    "uvicorn>=0.38.0",
+]
