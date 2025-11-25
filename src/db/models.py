@@ -83,7 +83,7 @@ class PullRequest(Base):
         lazy="selectin",
     )
     created_at: Mapped[datetime.datetime | None] = MappedColumn(default=now())
-    merged_at: Mapped[datetime.datetime | None] = MappedColumn(default=now())
+    merged_at: Mapped[datetime.datetime | None] = MappedColumn(default=None)
 
     author_id: Mapped[uuid.UUID] = MappedColumn(
         ForeignKey("users.id", ondelete="CASCADE")

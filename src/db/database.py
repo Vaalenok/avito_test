@@ -8,7 +8,7 @@ from src.config import DB_USERNAME, DB_PASSWORD, DB_IP, DB_PORT, DB_NAME
 
 engine = create_async_engine(
     f"postgresql+asyncpg://{DB_USERNAME}:{DB_PASSWORD}@{DB_IP}:{DB_PORT}/{DB_NAME}",
-    echo=True,
+    echo=False,
     pool_pre_ping=True,
 )
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)

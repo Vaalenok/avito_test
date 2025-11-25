@@ -1,0 +1,37 @@
+services:
+  database:
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - api_network
+    restart: unless-stopped
+
+  api:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - TIME_ZONE=${TIME_ZONE}
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - api_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  api_network:
+    driver: bridge

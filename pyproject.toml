@@ -9,6 +9,7 @@ dependencies = [
     "colorlog>=6.10.1",
     "environs>=14.5.0",
     "fastapi>=0.121.3",
+    "locust>=2.42.5",
     "pytz>=2025.2",
     "ruff>=0.14.6",
     "sqlalchemy>=2.0.44",

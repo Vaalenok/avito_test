@@ -12,6 +12,10 @@ class UserActiveStatusSchema(BaseModel):
     is_active: bool
 
 
+class UsersDeactivateSchema(BaseModel):
+    user_ids: list[str]
+
+
 @router.post("/setIsActive")
 async def set_user_status(user: UserActiveStatusSchema):
     db_user = await crud.get(User, user.user_id)
@@ -32,7 +36,6 @@ async def set_user_status(user: UserActiveStatusSchema):
     }
 
 
-# TODO: отдебажить
 @router.get("/getReview")
 async def get_user_reviews(user_id: str):
     db_user = await crud.get(User, user_id)
@@ -52,3 +55,13 @@ async def get_user_reviews(user_id: str):
         }
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+
+@router.post("/deactivate")
+async def deactivate_users(data: UsersDeactivateSchema):
+    for user_id in data.user_ids:
+        db_user = await crud.get(User, user_id)
+        db_user.is_active = False
+        await crud.update(db_user)
+
+    return {"deactivated": data.user_ids}
